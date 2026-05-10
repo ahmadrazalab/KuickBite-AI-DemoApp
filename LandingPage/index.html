@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KuickBite AI | Enterprise DevOps + AI Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020617;
+            --surface: #0f172a;
+            --surface-alt: #1e293b;
+            --primary: #8b5cf6; /* Vibrant Purple */
+            --accent: #f59e0b;  /* Golden Yellow */
+            --text-base: #f8fafc;
+            --text-dim: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255, 255, 255, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary), #d946ef);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --container-max: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-base);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dim);
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .btn-nav {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .btn-nav:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 180px 0 120px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to bottom right, #fff 40%, var(--text-dim));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+            line-height: 1.5;
+        }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: var(--radius-md);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 30px -10px rgba(139, 92, 246, 0.6);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .visual-frame {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visual-frame::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.5;
+        }
+
+        .code-block {
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .line { display: block; }
+        .comment { color: var(--text-muted); }
+        .keyword { color: #c084fc; }
+        .string { color: #fbbf24; }
+        .cli { color: #4ade80; }
+
+        /* --- Features --- */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .f-card {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .f-card:hover {
+            border-color: var(--accent);
+            background: var(--surface-alt);
+            transform: translateY(-4px);
+        }
+
+        .f-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .f-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .f-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- Architecture --- */
+        .arch-wrap {
+            background: #050b1d;
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .node {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .node.highlight {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+
+        .connector {
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border);
+            position: relative;
+        }
+
+        .connector::after {
+            content: '→';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* --- CTA --- */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-inner {
+            background: linear-gradient(135deg, var(--surface) 0%, #0c0a1f 100%);
+            padding: 5rem 2rem;
+            border-radius: 32px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-inner h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-inner p {
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .socials {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .socials a {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .socials a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 140px;
+            }
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { margin: 0 auto 2.5rem; }
+            .hero-visual { max-width: 500px; margin: 0 auto; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.75rem; }
+            .flow { flex-direction: column; gap: 2rem; }
+            .connector { height: 40px; width: 1px; flex-grow: 0; }
+            .connector::after { transform: translate(-50%, -50%) rotate(90deg); }
+            .cta-inner h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">KuickBite <span>AI</span></a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#">Docs</a></li>
+                <li><a href="#" class="btn-nav">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="container hero">
+        <div class="hero-content">
+            <h1>Build, Deploy, and Scale AI Systems on AWS</h1>
+            <p>Production-ready AI infrastructure for modern DevOps. Zero-config deployment for your LLMs and generative pipelines.</p>
+            <div class="hero-actions">
+                <a href="#" class="btn-cta">Get Started</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="visual-frame">
+                <div class="code-block">
+                    <span class="line comment"># deploy-ai-service.yml</span>
+                    <span class="line"><span class="keyword">platform</span>: kuickbite</span>
+                    <span class="line"><span class="keyword">runtime</span>: aws-eks-v2</span>
+                    <span class="line"><span class="keyword">scaling</span>:</span>
+                    <span class="line">&nbsp;&nbsp;<span class="keyword">min_replicas</span>: 2</span>
+                    <span class="line">&nbsp;&nbsp;<span class="keyword">gpu_enabled</span>: true</span>
+                    <br>
+                    <span class="line cli">$ kb deploy --cluster prod</span>
+                    <span class="line cli" style="color: #4ade80;">[OK] VPC verified</span>
+                    <span class="line cli" style="color: #4ade80;">[OK] AI Nodes provisioned</span>
+                    <span class="line cli" style="color: #4ade80;">[OK] Endpoint: https://api.kb.ai/v1</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="section container">
+        <div class="section-header">
+            <h2>Built for Scale</h2>
+            <p>Enterprise features without the operational overhead.</p>
+        </div>
+        <div class="feature-grid">
+            <div class="f-card">
+                <div class="f-icon">💬</div>
+                <h3>AI Chat</h3>
+                <p>Managed LLM endpoints with built-in context window optimization and persistence.</p>
+            </div>
+            <div class="f-card">
+                <div class="f-icon">✨</div>
+                <h3>Generative Ops</h3>
+                <p>Scale image and video generation pipelines with dedicated GPU auto-scaling groups.</p>
+            </div>
+            <div class="f-card">
+                <div class="f-icon">📊</div>
+                <h3>Token Guard</h3>
+                <p>Real-time usage monitoring and rate-limiting tailored for high-concurrency AI loads.</p>
+            </div>
+            <div class="f-card">
+                <div class="f-icon">☁️</div>
+                <h3>Cloud Native</h3>
+                <p>Leverage the power of AWS EKS and SageMaker with native Terraform providers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="arch-wrap">
+        <div class="container">
+            <div class="section-header">
+                <h2>Production Architecture</h2>
+            </div>
+            <div class="flow">
+                <div class="node">Frontend</div>
+                <div class="connector"></div>
+                <div class="node">Backend</div>
+                <div class="connector"></div>
+                <div class="node">Database</div>
+                <div class="connector"></div>
+                <div class="node highlight">AI Services</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container cta-section">
+        <div class="cta-inner">
+            <h2>Ready to ship?</h2>
+            <p>Join the future of AI-driven infrastructure.</p>
+            <a href="#" class="btn-cta">Start Building Today</a>
+        </div>
+    </section>
+
+    <footer class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">KuickBite AI</div>
+            <div class="socials">
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 KuickBite AI. All rights reserved. Professional DevOps + AI.
+        </div>
+    </footer>
+
+</body>
+</html>
